@@ -1,12 +1,12 @@
-import axios from 'axios';
-import FacebookLogin from 'react-facebook-login';
+import { FacebookLoginButton } from "reactjs-social-login";
 import { useDispatch } from 'react-redux';
 import { loginSuccess } from '../../features/auth';
+import axios from "axios";
 
-export default function FacebookSignIn() {
+const FacebookLogin = () => {
   const dispatch = useDispatch();
 
-  const handleResponse = async (response) => {
+  const handleLoginSuccess = async (response) => {
     if (response.accessToken) {
       try {
         const res = await axios.post(`${import.meta.env.VITE_BASE_URL}/auth/facebook`, {
@@ -34,19 +34,24 @@ export default function FacebookSignIn() {
       }
     }
   };
+
+  const handleLoginFailure = (error) => {
+    console.error("Facebook login error:", error);
+  };
+
   return (
     <div className="flex justify-center mt-4">
-      <FacebookLogin
-        appId="1130573835435542"
-        autoLoad={false}
-        fields="name,email,picture"
-        callback={handleResponse}
-        cssClass="bg-blue-600 text-white py-1 px-4 rounded-lg hover:bg-blue-700 transition w-full"
-        icon="fa-facebook"
-        textButton=" Login With Facebook"
-      />
+      <FacebookLoginButton
+        appId="YOUR_FACEBOOK_APP_ID"
+        onLoginSuccess={handleLoginSuccess}
+        onLoginFailure={handleLoginFailure}
+      >
+        Login with Facebook
+      </FacebookLoginButton>
     </div>
   );
-}
+};
+
+export default FacebookLogin;
 
 

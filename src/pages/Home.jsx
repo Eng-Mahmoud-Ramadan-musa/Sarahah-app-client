@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 import Messages from './Messages';
 import { useSelector } from "react-redux";
 import GoogleSignIn from "../components/buttons/GoogleSignIn.jsx";
-import FacebookLoginButton from "../components/buttons/FacebookSignIn.jsx";
 import { useEffect} from "react";
 import { Helmet } from "react-helmet";
+import FacebookLogin from "../components/buttons/FacebookSignIn.jsx";
 
 export default function Home() {
   const user = useSelector((state) => state.auth.currentUser);
@@ -50,7 +50,7 @@ export default function Home() {
                     <GoogleSignIn  />
                   </span>
                   <span className="hover:scale-105 duration-200">
-                    <FacebookLoginButton  />
+                    <FacebookLogin  />
                   </span>
                 </div>
               </>
