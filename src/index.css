@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,body {
+    scroll-behavior: smooth;
+},
+.outlined-text {
+    -webkit-text-stroke: 2px #fff; 
+  }
