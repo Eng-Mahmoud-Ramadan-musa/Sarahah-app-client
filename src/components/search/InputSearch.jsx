@@ -11,11 +11,11 @@ export default function InputSearch() {
 
   const handleInputChange = (e) => {
     const value = e.target.value;
-    setQuery(value); // تحديث النص المدخل
+    setQuery(value); // Update input text
     if (showData === "user") {
-      dispatch(searchUsers({ title: value, search: value.length > 0, mangeState: "user" }));  // تحديث البحث
+      dispatch(searchUsers({ title: value, search: value.length > 0, mangeState: "user" }));  // Update search
     } else {
-    dispatch(searchMessages({ title: value, search: value.length > 0, mangeState: "search" })); // تحديث البحث
+    dispatch(searchMessages({ title: value, search: value.length > 0, mangeState: "search" })); // Update search
     }
   };
 

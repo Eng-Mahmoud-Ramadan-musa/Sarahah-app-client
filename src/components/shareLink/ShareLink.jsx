@@ -23,7 +23,7 @@ export default function ShareLink() {
         onClick={handleCopy}
         className="text-sm text-blue-300 hover:text-blue-500 transition"
       >
-        {copied ? "تم النسخ ✅" : "نسخ رابط المشاركة"}
+        {copied ? "Copied ✅" : "Copy share link"}
       </button>
     </div>
   );

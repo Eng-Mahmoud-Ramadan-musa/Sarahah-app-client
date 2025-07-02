@@ -13,12 +13,12 @@ export default function Login() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState(null); // لإدارة أخطاء الحقول
+  const [errors, setErrors] = useState(null); // For managing field errors
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // إعادة تعيين الأخطاء عند المحاولة
+    // Reset errors on attempt
 
     try {
       
@@ -41,7 +41,7 @@ export default function Login() {
       );
       const redirectAfterLogin = localStorage.getItem("redirectAfterLogin");
       if (redirectAfterLogin) {
-        localStorage.removeItem("redirectAfterLogin"); // مهم عشان متكررش التوجيه
+        localStorage.removeItem("redirectAfterLogin"); // Important to avoid repeated redirects
         window.location.href = redirectAfterLogin;
       } else {
         window.location.href = "/messages";
@@ -56,17 +56,17 @@ export default function Login() {
   return (
     <>
       <Helmet>
-        <title>تسجيل الدخول | سراحه</title>
-        <meta name="description" content="سجل دخولك إلى تطبيق سراحه وابدأ باستقبال الرسائل المجهولة." />
-        <meta property="og:title" content="تسجيل الدخول | سراحه" />
-        <meta property="og:description" content="سجل دخولك إلى تطبيق سراحه وابدأ باستقبال الرسائل المجهولة." />
+        <title>Login | Sarahah</title>
+        <meta name="description" content="Log in to Sarahah app and start receiving anonymous messages." />
+        <meta property="og:title" content="Login | Sarahah" />
+        <meta property="og:description" content="Log in to Sarahah app and start receiving anonymous messages." />
       </Helmet>
       <div className="w-full px-[5%] h-full flex flex-col justify-center items-center gap-5">
         <BackButton url='/' />
         <FaRegCircleUser className="text-5xl text-white" />
         <h2 className="text-2xl font-bold text-green-500">Login</h2>
         <form className="w-full max-w-80 border p-5 rounded-lg flex flex-col items-center gap-3 " onSubmit={handleSubmit}>
-          {/* حقل البريد الإلكتروني */}
+          {/* Email field */}
           <div className="w-full">
             <input
               className={`w-full border-b-2 outline-none ps-3 ${errors ? "border-red-500" : ""}`}
@@ -78,7 +78,7 @@ export default function Login() {
             />
           </div>
 
-          {/* حقل كلمة المرور */}
+          {/* Password field */}
           <div className="w-full">
             <input
               className={`w-full border-b-2 outline-none ps-3 ${errors ? "border-red-500" : ""}`}
@@ -90,12 +90,12 @@ export default function Login() {
             />
           </div>
 
-          {/* زر تسجيل الدخول */}
+          {/* Login button */}
           <button type="submit" className="mb-3 h-8 px-3 rounded-lg bg-green-500 text-white font-bold text-lg w-fit">
             Login
           </button>
 
-          {/* روابط إضافية */}
+          {/* Additional links */}
           <p className="w-full flex justify-between text-sm text-gray-500">
             <Link to={"/forget-password"} className="hover:scale-105 hover:text-gray-300 duration-200">Forgot Password?</Link> 
             <Link className="text-black font-bold bg-gray-300 hover:text-white duration-200 border px-2 py-1 rounded-lg border-white hover:bg-red-500" to="/register">Register</Link>

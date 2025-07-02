@@ -26,7 +26,7 @@ export default function Header() {
       <Link to="/profile">
     {user?.image ? (
       <img
-      src={user?.image.startsWith("http") ? user?.image : `${import.meta.env.VITE_BASE_URL}/uploads/${user?.image}`}
+      src={user?.image.secure_url}
         alt={user?.userName}
         className="w-full h-full object-cover"
       />

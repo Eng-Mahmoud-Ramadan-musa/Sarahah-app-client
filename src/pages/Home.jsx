@@ -15,7 +15,7 @@ export default function Home() {
       }
     }, 1000);
 
-    // تنظيف الـ interval عند التدمير
+    // Clean up the interval on unmount
     return () => clearInterval(checkFbSdk);
   }, []);
 

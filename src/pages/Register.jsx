@@ -21,9 +21,9 @@ export default function Register() {
   useEffect(() => {
     if (image) {
       const objectUrl = URL.createObjectURL(image);
-      setImagePreview(objectUrl); // تعيين صورة المعاينة
+      setImagePreview(objectUrl); // Set preview image
 
-      return () => URL.revokeObjectURL(objectUrl); // تنظيف الذاكرة بعد استخدام الصورة
+      return () => URL.revokeObjectURL(objectUrl); // Clean up memory after using the image
     }
   }, [image]);
 
@@ -39,7 +39,7 @@ export default function Register() {
     formData.append('dob', dob);
     formData.append('gender', gender);
     if (image) {
-        formData.append('image', image); // إضافة الصورة إذا كانت موجودة
+        formData.append('image', image); // Add image if it exists
     }
 
     try {
@@ -66,10 +66,10 @@ export default function Register() {
   return (
     <>
       <Helmet>
-        <title>تسجيل حساب جديد | سراحه</title>
-        <meta name="description" content="أنشئ حسابك في تطبيق سراحه وابدأ باستقبال الرسائل المجهولة من أصدقائك." />
-        <meta property="og:title" content="تسجيل حساب جديد | سراحه" />
-        <meta property="og:description" content="أنشئ حسابك في تطبيق سراحه وابدأ باستقبال الرسائل المجهولة من أصدقائك." />
+        <title>Register New Account | Sarahah</title>
+        <meta name="description" content="Create your account in Sarahah app and start receiving anonymous messages from your friends." />
+        <meta property="og:title" content="Register New Account | Sarahah" />
+        <meta property="og:description" content="Create your account in Sarahah app and start receiving anonymous messages from your friends." />
       </Helmet>
       <div className="w-full px-[5%] h-full flex flex-col justify-center items-center gap-5">
         <BackButton url='/' />
@@ -161,7 +161,7 @@ export default function Register() {
               hover:file:bg-violet-100
             "
               type="file" 
-              accept="image/*" // قبول فقط ملفات الصور
+              accept="image/*" // Accept only image files
               onChange={(e) => setImage(e.target.files[0])} 
             />
             {imagePreview && (

@@ -39,8 +39,8 @@ export default function Message({ msg ,index}) {
     </h2>
     ) :(
     <img
-    src={user.image.startsWith("http") ? user.image : `${import.meta.env.VITE_BASE_URL}/uploads/${user.image}`}
-    alt={msg.sender.userName ? `صورة المستخدم ${msg.sender.userName}` : "صورة المستخدم"}
+    src={user.image.secure_url}
+    alt={msg.sender.userName ? `User image ${msg.sender.userName}` : "User image"}
     className="w-12 h-12 rounded-full hover:scale-110 duration-200"
     />
   )

@@ -21,16 +21,16 @@ export default function Profile() {
     const [dob, setDob] = useState(user.dob);
     const [gender, setGender] = useState(user.gender);
     const [image, setImage] = useState(null);
-    const [imagePreview, setImagePreview] = useState(user.image);
+    const [imagePreview, setImagePreview] = useState(user.image.secure_url);
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(null);
     const fileInputRef = useRef();
     useEffect(() => {
       if (image) {
         const objectUrl = URL.createObjectURL(image);
-        setImagePreview(objectUrl); // تعيين صورة المعاينة
+        setImagePreview(objectUrl); // Set preview image
   
-        return () => URL.revokeObjectURL(objectUrl); // تنظيف الذاكرة بعد استخدام الصورة
+        return () => URL.revokeObjectURL(objectUrl); // Clean up memory after using the image
       }
     }, [image]);
     
@@ -104,7 +104,7 @@ export default function Profile() {
       
       dispatch(save({ user: res.data.data }));
       dispatch(updated());
-      setSuccess(res.data.message); // عرض رسالة النجاح
+      setSuccess(res.data.message); // Show success message
       setError(null);
     } catch (error) {
       setError(error.response?.data?.message || "An error occurred");
@@ -114,10 +114,10 @@ export default function Profile() {
     return (
       <>
         <Helmet>
-          <title>الملف الشخصي | سراحه</title>
-          <meta name="description" content="صفحة الملف الشخصي الخاصة بك في تطبيق سراحه. عدل بياناتك أو صورتك الشخصية بسهولة." />
-          <meta property="og:title" content="الملف الشخصي | سراحه" />
-          <meta property="og:description" content="صفحة الملف الشخصي الخاصة بك في تطبيق سراحه. عدل بياناتك أو صورتك الشخصية بسهولة." />
+          <title>Profile | Sarahah</title>
+          <meta name="description" content="Your profile page in Sarahah app. Edit your data or profile picture easily." />
+          <meta property="og:title" content="Profile | Sarahah" />
+          <meta property="og:description" content="Your profile page in Sarahah app. Edit your data or profile picture easily." />
         </Helmet>
         <div className="relative h-screen w-full flex items-center justify-center px-[10%]">
           <BackButton url='/messages' />
@@ -133,7 +133,7 @@ export default function Profile() {
       <div className="relative">
         <img 
           src={imagePreview || user.image} 
-          alt={user.userName ? `صورة المستخدم ${user.userName}` : "صورة المستخدم"} 
+          alt={user.userName ? `User image ${user.userName}` : "User image"} 
           className="w-16 h-16 object-cover rounded-full border-2 border-gray-100" 
         />
         { updateUser &&<div className="absolute bottom-0 right-0 flex gap-1">
@@ -141,7 +141,7 @@ export default function Profile() {
             className="bg-red-500 p-1 rounded-full cursor-pointer hover:bg-red-600 transition-colors z-40"
             onClick={() => {
               setImage(null);
-              setImagePreview(null); // حذف الصورة
+              setImagePreview(null); // Remove image
             }}
           >
             <RiDeleteBin6Line className="text-white text-sm" />

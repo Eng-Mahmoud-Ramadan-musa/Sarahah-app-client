@@ -7,7 +7,6 @@ const api = axios.create({
   },
 });
 
-// Interceptor to attach access token
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('access_token');
   if (token) {
@@ -16,36 +15,41 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-// Interceptor to handle 401 and refresh token
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
-    if (error.response && error.response.status === 401 && !originalRequest._retry) {
+    if (
+      error.response?.status === 401 &&
+      !originalRequest._retry
+    ) {
       originalRequest._retry = true;
       const refreshToken = localStorage.getItem('refresh_token');
       if (refreshToken) {
         try {
-          const res = await axios.post(`${import.meta.env.VITE_BASE_URL}/auth/refresh-token`, { refreshToken });
-          if (res.data && res.data.access_token) {
-            localStorage.setItem('access_token', res.data.access_token);
-            // أعد إرسال الطلب الأصلي مع التوكن الجديد
-            originalRequest.headers['authorization'] = `${import.meta.env.VITE_BEARER_KEY} ${res.data.access_token}`;
+          const res = await axios.post(`${import.meta.env.VITE_BASE_URL}/auth/refresh-token`, {
+            refreshToken,
+          });
+
+          const newToken = res.data.access_token || res.data.token;
+          if (newToken) {
+            localStorage.setItem('access_token', newToken);
+            originalRequest.headers['authorization'] = `${import.meta.env.VITE_BEARER_KEY} ${newToken}`;
             return api(originalRequest);
           }
-        } catch (refreshError) {
-          // إذا فشل التجديد، احذف التوكنات وأعد التوجيه لتسجيل الدخول
+        } catch (err) {
+          console.log('Error: ' ,err);
           localStorage.removeItem('access_token');
           localStorage.removeItem('refresh_token');
           window.location.href = '/login';
         }
       } else {
-        // لا يوجد refresh token
         window.location.href = '/login';
       }
     }
+
     return Promise.reject(error);
   }
 );
 
-export default api; 
+export default api;

@@ -32,10 +32,10 @@ export default function ForgetPassword() {
 
     try {
       const response = await api.post(`/auth/forget-password`, { email });
-      setMessage(response.data.message || "تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني.");
+      setMessage(response.data.message || "Password reset link has been sent to your email.");
       setNext(true);
     } catch (err) {
-      setError(err.response?.data?.message || "حدث خطأ أثناء إرسال الطلب.");
+      setError(err.response?.data?.message || "An error occurred while sending the request.");
     }
   };
 
@@ -48,20 +48,20 @@ export default function ForgetPassword() {
 
     try {
       const response = await api.post(`/auth/reset-password`, { email, otp, password, confirmPassword });
-      setMessage(response.data.message || "تم تغيير كلمة المرور بنجاح.");
+      setMessage(response.data.message || "Password changed successfully.");
       window.location.href = "/login";
     } catch (err) {
-      setError(err.response?.data?.message || "حدث خطأ أثناء تغيير كلمة المرور.");
+      setError(err.response?.data?.message || "An error occurred while changing the password.");
     }
   };
 
   return (
     <>
       <Helmet>
-        <title>نسيت كلمة المرور | سراحه</title>
-        <meta name="description" content="استرجع كلمة المرور الخاصة بك في تطبيق سراحه بسهولة عبر البريد الإلكتروني." />
-        <meta property="og:title" content="نسيت كلمة المرور | سراحه" />
-        <meta property="og:description" content="استرجع كلمة المرور الخاصة بك في تطبيق سراحه بسهولة عبر البريد الإلكتروني." />
+        <title>Forgot Password | Sarahah</title>
+        <meta name="description" content="Recover your password in Sarahah app easily via email." />
+        <meta property="og:title" content="Forgot Password | Sarahah" />
+        <meta property="og:description" content="Recover your password in Sarahah app easily via email." />
       </Helmet>
       <div className="min-h-screen flex items-center justify-center bg-slate-800">
         <div className="w-full max-w-md p-6 bg-gray-300 border rounded-lg shadow-md">

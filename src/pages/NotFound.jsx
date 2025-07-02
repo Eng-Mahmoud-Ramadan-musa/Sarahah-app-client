@@ -4,10 +4,10 @@ export default function NotFound({ content = 'page' }) {
     return (
       <>
         <Helmet>
-          <title>الصفحة غير موجودة | سراحه</title>
-          <meta name="description" content="الصفحة التي تبحث عنها غير موجودة في تطبيق سراحه." />
-          <meta property="og:title" content="الصفحة غير موجودة | سراحه" />
-          <meta property="og:description" content="الصفحة التي تبحث عنها غير موجودة في تطبيق سراحه." />
+          <title>Page Not Found | Sarahah</title>
+          <meta name="description" content="The page you are looking for does not exist in Sarahah app." />
+          <meta property="og:title" content="Page Not Found | Sarahah" />
+          <meta property="og:description" content="The page you are looking for does not exist in Sarahah app." />
         </Helmet>
         <div className="w-full text-white h-full font-bold text-3xl flex justify-center items-center">
           {

@@ -13,15 +13,11 @@ export default function Users() {
 
   const renderUserCard = (user, index) => (
     <div className="flex w-full h-16 justify-between items-center border rounded-lg border-white text-white px-[5%] gap-2">
-      {/* صورة المستخدم أو الأحرف الأولى */}
+      {/* User image or first initials */}
       <div className="w-12 h-12">
         {user.image ? (
           <img
-            src={
-              user.image.startsWith("http")
-                ? user.image
-                : `${import.meta.env.VITE_BASE_URL}/uploads/${user.image}`
-            }
+            src={user.image.secure_url}
             alt="user"
             className="h-full w-full border-2 rounded-full object-cover"
           />
@@ -32,7 +28,7 @@ export default function Users() {
         )}
       </div>
 
-      {/* بيانات المستخدم */}
+      {/* User data */}
       <div className="w-2/3 bg-gray-700 text-nowrap text-ellipsis overflow-hidden px-3 rounded-lg">
         <h2>{user.userName}</h2>
         <h3 className="text-gray-400 text-nowrap text-ellipsis overflow-hidden">
@@ -40,7 +36,7 @@ export default function Users() {
         </h3>
       </div>
 
-      {/* زر إرسال رسالة وزر الصداقة */}
+      {/* Send message button and friendship button */}
       <div className="flex items-center gap-1 justify-between w-16">
         <Link
           to={`/send-message?${new URLSearchParams({ userName: user.userName, email: user.email }).toString()}`}
@@ -55,7 +51,7 @@ export default function Users() {
     </div>
   );
 
-  // تحديد المستخدمين المعروضين: مفلترين أم كامل القائمة
+  // Determine which users to display: filtered or full list
   const usersToShow =
     showData === "user" && filteredUsers.length > 0 ? filteredUsers : users;
 
@@ -65,12 +61,12 @@ export default function Users() {
         <title>Users Home</title>
         <meta
           name="description"
-          content="تصفح جميع مستخدمي تطبيق سراحه وأرسل لهم رسائل مجهولة."
+          content="Browse all Sarahah app users and send them anonymous messages."
         />
-        <meta property="og:title" content="المستخدمون | سراحه" />
+        <meta property="og:title" content="Users | Sarahah" />
         <meta
           property="og:description"
-          content="تصفح جميع مستخدمي تطبيق سراحه وأرسل لهم رسائل مجهولة."
+          content="Browse all Sarahah app users and send them anonymous messages."
         />
       </Helmet>
 

@@ -9,9 +9,9 @@ export default function SendMessage() {
     <>
       <Helmet>
         <title>Send Message</title>
-        <meta name="description" content="أرسل رسالة مجهولة لأي مستخدم في تطبيق سراحه بسهولة وسرية." />
-        <meta property="og:title" content="إرسال رسالة | سراحه" />
-        <meta property="og:description" content="أرسل رسالة مجهولة لأي مستخدم في تطبيق سراحه بسهولة وسرية." />
+        <meta name="description" content="Send an anonymous message to any user in Sarahah app easily and privately." />
+        <meta property="og:title" content="Send Message | Sarahah" />
+        <meta property="og:description" content="Send an anonymous message to any user in Sarahah app easily and privately." />
       </Helmet>
       <div className="flex flex-col justify-center items-center h-full">
         <Header />

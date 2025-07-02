@@ -64,10 +64,10 @@ export default function Messages() {
   return (
     <>
       <Helmet>
-        <title>الرسائل | سراحه</title>
-        <meta name="description" content="صفحة الرسائل الخاصة بك في تطبيق سراحه. استقبل رسائل مجهولة من أصدقائك." />
-        <meta property="og:title" content="الرسائل | سراحه" />
-        <meta property="og:description" content="صفحة الرسائل الخاصة بك في تطبيق سراحه. استقبل رسائل مجهولة من أصدقائك." />
+        <title>Messages | Sarahah</title>
+        <meta name="description" content="Your messages page in Sarahah app. Receive anonymous messages from your friends." />
+        <meta property="og:title" content="Messages | Sarahah" />
+        <meta property="og:description" content="Your messages page in Sarahah app. Receive anonymous messages from your friends." />
       </Helmet>
       <div className="flex flex-col items-center justify-start w-full h-full pt-14">
         <Header />
