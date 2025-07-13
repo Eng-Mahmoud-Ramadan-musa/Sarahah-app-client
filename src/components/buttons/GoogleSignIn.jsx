@@ -2,6 +2,8 @@ import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "../../features/auth";
 import ErrorMessage from "../error/ErrorMessage";
+import axios from 'axios';
+
 
 export default function GoogleSignIn() {
   const dispatch = useDispatch();
@@ -9,17 +11,9 @@ export default function GoogleSignIn() {
     const idToken = response.credential;
     
     try {
-      const res = await fetch(`${import.meta.env.VITE_BASE_URL}/auth/google-login`,
-        {
-          method: "POST", 
-             headers: {
-          "Content-Type": "application/json"
-          },
-          body: JSON.stringify({idToken})
-        }
-      )
-      const responseData = await res.json();
-      const data = responseData.data;
+      const res = await axios.post(`${import.meta.env.VITE_BASE_URL}/auth/google-login`, idToken)
+
+      const data = res.data;
       
 
       if (!data.access_token) {
