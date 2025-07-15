@@ -4,7 +4,7 @@ import { getFirstTwoInitials } from "../utils/helpers";
 import UpdateFriend from "../components/buttons/UpdateFriend";
 import { Link } from "react-router-dom";
 import { GrSend } from "react-icons/gr";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 export default function Users() {
   const users = useSelector((state) => state.auth.users);

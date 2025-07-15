@@ -2,7 +2,7 @@ import React from 'react';
 import FormSendMessage from '../components/formSendMessage/FormSendMessage';
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 export default function SendMessage() {
   return (

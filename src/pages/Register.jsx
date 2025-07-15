@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { MdDelete } from "react-icons/md";
 import Loading from "../components/loading/Loading";
 import BackButton from "../components/buttons/Back";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 export default function Register() {
   const [loading, setLoading] = useState(false);

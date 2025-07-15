@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import api from '../utils/axios';
 // import { getFirstTwoInitials } from "../utils/helpers.js";
 import BackButton from "../components/buttons/Back.jsx";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 export default function Profile() {
   

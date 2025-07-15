@@ -10,7 +10,7 @@ import NotFound from "./NotFound";
 import Footer from "../components/footer/Footer.jsx";
 import Users from "./Users.jsx";
 import ShareLink from "../components/shareLink/ShareLink.jsx";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 export default function Messages() {
   const {token} = useSelector((state) => state.auth);

@@ -3,7 +3,7 @@ import Messages from './Messages';
 import { useSelector } from "react-redux";
 import GoogleSignIn from "../components/buttons/GoogleSignIn.jsx";
 import { useEffect} from "react";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import FacebookLogin from "../components/buttons/FacebookSignIn.jsx";
 
 export default function Home() {

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import api from '../utils/axios';
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 export default function ForgetPassword() {
   const [email, setEmail] = useState("");

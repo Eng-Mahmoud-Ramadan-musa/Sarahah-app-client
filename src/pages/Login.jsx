@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import BackButton from "../components/buttons/Back.jsx";
 import Error from "../components/error/ErrorMessage.jsx";
 import ErrorMessage from "../components/error/ErrorMessage.jsx";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 export default function Login() {
   const dispatch = useDispatch();
