@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+const bearerKey = import.meta.env.VITE_BEARER_KEY;
+
 const api = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
   headers: {
@@ -10,7 +12,7 @@ const api = axios.create({
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('access_token');
   if (token) {
-    config.headers['authorization'] = `${import.meta.env.VITE_BEARER_KEY} ${token}`;
+    config.headers['authorization'] = `${bearerKey} ${token}`;
   }
   return config;
 });
@@ -19,32 +21,36 @@ api.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
+
     if (
       error.response?.status === 401 &&
       !originalRequest._retry
     ) {
       originalRequest._retry = true;
+
       const refreshToken = localStorage.getItem('refresh_token');
       if (refreshToken) {
         try {
-          const res = await axios.post(`${import.meta.env.VITE_BASE_URL}/auth/refresh-token`, {
-            refreshToken,
-          });
+          const res = await axios.post(
+            `${import.meta.env.VITE_BASE_URL}/auth/refresh-token`,
+            { refreshToken }
+          );
 
-          const newToken = res.data.access_token || res.data.token;
+          const newToken = res.data.token ?? res.data.access_token;
+
           if (newToken) {
             localStorage.setItem('access_token', newToken);
-            originalRequest.headers['authorization'] = `${import.meta.env.VITE_BEARER_KEY} ${newToken}`;
+            originalRequest.headers['authorization'] = `${bearerKey} ${newToken}`;
             return api(originalRequest);
           }
         } catch (err) {
-          console.log('Error: ' ,err);
+          console.error('Token refresh failed:', err);
           localStorage.removeItem('access_token');
           localStorage.removeItem('refresh_token');
-          window.location.href = '/login';
+          setTimeout(() => window.location.href = '/login', 100);
         }
       } else {
-        window.location.href = '/login';
+        setTimeout(() => window.location.href = '/login', 100);
       }
     }
 
