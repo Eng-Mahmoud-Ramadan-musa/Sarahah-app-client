@@ -11,14 +11,9 @@ export default function GoogleSignIn() {
     const idToken = response.credential;
     
     try {
-      const res = await axios.post(`${import.meta.env.VITE_BASE_URL}/auth/google-login`, idToken)
-
-      const data = res.data;
+      const res = await axios.post(`${import.meta.env.VITE_BASE_URL}/auth/google-login`, {idToken})
       
-
-      if (!data.access_token) {
-        throw new Error("Login failed");
-      }
+      const data = res.data?.data;
 
       dispatch(
         loginSuccess({

@@ -26,7 +26,7 @@ export default function Login() {
         email,
         password,
       });
-      const data = await response.data.data;
+      const data = await response.data?.data;
 
       if (!data.access_token) {
         throw new Error("Login failed");
@@ -47,8 +47,8 @@ export default function Login() {
         window.location.href = "/messages";
       }
 
-    } catch (error) {      
-        setErrors(error.message);
+    } catch (error) {   
+        setErrors(error.response.data.message);
 
     }
   };

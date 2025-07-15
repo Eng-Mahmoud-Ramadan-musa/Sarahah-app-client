@@ -45,6 +45,7 @@ const FacebookSignIn = () => {
       <FacebookLogin
         appId="YOUR_FACEBOOK_APP_ID"
         onSuccess={handleSuccess}
+        height="40px"
         onFail={handleFail}
         render={({ onClick }) => (
           <button onClick={onClick}>Login with Facebook</button>
