@@ -7,7 +7,6 @@ const FacebookSignIn = () => {
   const dispatch = useDispatch();
 
   const handleSuccess = async (response) => {
-    console.log("Facebook login success:", response);
     if (response.accessToken) {
       try {
         const res = await axios.post(`${import.meta.env.VITE_BASE_URL}/auth/facebook`, {

@@ -27,7 +27,7 @@ export default function Messages() {
             authorization: `${import.meta.env.VITE_BEARER_KEY} ${token}`,
           },
         });
-        dispatch(getMessages({ data: res.data.data }));
+        dispatch(getMessages({ data: res.data.data , favorite: res.data.favorite}));
       } catch (err) {
         console.error("Error fetching messages:", err.message);
       }

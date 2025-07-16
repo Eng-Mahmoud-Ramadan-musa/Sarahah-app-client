@@ -22,8 +22,8 @@ export default function Filter() {
           "Content-Type": "application/json",
         },
       });
-      
-      dispatch(store({ data: response.data.data, mangeState: optional }));
+      dispatch(store({ data: response.data.data, mangeState: optional, favorite: response.data.favorite }));
+
     } catch (error) {
       console.error("Error fetching messages:", error.message);
     }
@@ -49,7 +49,7 @@ export default function Filter() {
 
   return (
     <div className="w-full flex items-center justify-center gap-3 px-[5%] bg-slate-500">
-      <h3 className="text-lg font-bold text-gray-800">Filter:</h3>
+      <h3 className="text-lg font-bold text-white">Filter:</h3>
       <form className="text-white w-full h-full flex items-center justify-center gap-3 text-lg">
         {filters.map((filter) => (
           <button

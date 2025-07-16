@@ -4,15 +4,30 @@ import { useDispatch, useSelector } from "react-redux";
 import api from '../../utils/axios';
 import RemoveOrRestore from "../buttons/RemoveOrRestore";
 import FriendOrBlock from "../buttons/FriendOrBlock";
-import { deleteMessage, isFavorites } from "../../features/message";
+import { isFavorites } from "../../features/message";
+import { useState, useEffect } from "react";
 
 export default function FormController({ msg, index }) {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
-  // const user = useSelector((state) => state.auth.currentUser);
-  const showData = useSelector((state) => state.message.showData);
+  const { showData, listFavorite } = useSelector((state) => state.message);
+
+  const [isFavorite, setIsFavorite] = useState(null); 
+
+useEffect(() => {
+  if (Array.isArray(listFavorite)) {
+    const exists = listFavorite.includes(msg._id);
+    if (isFavorite === null || isFavorite !== exists) {
+      setIsFavorite(exists);
+    }
+  }
+}, [listFavorite, msg._id]);
 
   const fetchMessages = async (endpoint) => {
+    const optimistic = !isFavorite;
+    setIsFavorite(optimistic); // ✅ تحديث الزر فورًا
+    dispatch(isFavorites( index ));
+
     try {
       await api.patch(
         `${import.meta.env.VITE_BASE_URL}${endpoint}`,
@@ -24,13 +39,11 @@ export default function FormController({ msg, index }) {
           },
         }
       );
-      if (showData !== "favorite") {
-        dispatch(isFavorites(index));
-      } else {
-        dispatch(deleteMessage(index));
-      }
     } catch (error) {
       console.error("Error updating favorite status:", error);
+      // ❌ تراجع إذا فشلت العملية
+      setIsFavorite(!optimistic);
+      dispatch(isFavorites({ index }));
     }
   };
 
@@ -38,21 +51,19 @@ export default function FormController({ msg, index }) {
     <div className="flex justify-end items-center gap-2 text-xl w-32 h-8">
       {showData !== "archive" && (
         <>
-          
-            <FriendOrBlock msg={msg} index={index} />
-
-<button
-  onClick={() => {
-    fetchMessages(`/message/${msg._id}`)
-  }}
-  className="hover:scale-110 duration-200 hover:bg-slate-400 p-1 rounded-lg"
->
-  <MdOutlineFavorite
-    className={`${
-      msg.favorite ? "bg-white text-red-500 rounded-sm" : "text-gray-500"
-    }`}
-  />
-</button>
+          <FriendOrBlock msg={msg} index={index} />
+{isFavorite !== null && (
+  <button
+    onClick={() => fetchMessages(`/message/${msg._id}`)}
+    className="hover:scale-110 duration-200 p-1 rounded-lg"
+  >
+    <MdOutlineFavorite
+      className={`text-2xl transition-colors duration-300 ${
+        isFavorite ? "text-red-500" : "text-gray-500"
+      }`}
+    />
+  </button>
+)}
 
         </>
       )}

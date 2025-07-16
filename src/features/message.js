@@ -7,6 +7,7 @@ const initialState = {
   showData: 'all', 
   search: false,
   showInputMessage: false,
+  listFavorite: []
 };
 
 const messagesSlice = createSlice({
@@ -16,6 +17,7 @@ const messagesSlice = createSlice({
     getMessages: (state, action) => {
       state.messages = action.payload.data;  
       state.showData =  action.payload.mangeState;
+      state.listFavorite = action.payload.favorite || [];
     },
     addMessage: (state, action) => {
       state.messages.unshift(action.payload);
